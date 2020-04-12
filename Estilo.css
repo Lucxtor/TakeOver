@@ -169,6 +169,21 @@ label{
 	z-index: 1;
 }
 
+#opCriarSala:hover .opBaixa{
+	visibility: visible;
+}
+
+.opBaixa{
+	position: absolute;
+	background-color: grey;
+	width: 104%;
+	height: 15%;
+	visibility: hidden;
+	left: -2%;
+	bottom: -2%;
+	z-index: 1;
+}
+
 #opEntrarSala{
 	border-style: solid;
 	border-width: 10px;
@@ -265,6 +280,13 @@ label{
 	font-size: 100%;
 	font-weight: bolder;
 	outline: none;
+}
+
+#linkSala{
+	background-color: rgba(255, 255, 255, 0.5);
+	height: 10%;
+	padding: 1.5%;
+	border-radius: 12px;
 }
 
 input[type=checkbox]{
