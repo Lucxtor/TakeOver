@@ -31,6 +31,10 @@ label{
 	color: white;
 }
 
+hr{
+	border-color: white;
+}
+
 #inputLogin{
 	text-align: center;
 	height: 10%;
@@ -235,7 +239,7 @@ label{
 	z-index: 1;
 }
 
-#tituloEixo{
+#titulo{
 	padding-bottom: 2%;
 	font-size: 300%;
 }
@@ -326,6 +330,25 @@ textarea{
 #imgEixos{
 	width: 100%;
 	height: auto;
+}
+
+#divSalas{
+	height: 100%;
+	width: 100%;
+	background: none;
+	border-style: solid;
+	border-width: 5px;
+	border-color: white;
+	cursor: pointer;
+}
+
+#containerSalas{
+	display: inline;
+}
+
+#adicao{
+	font-size: 90px;
+	font-weight: bold;
 }
 
 ::-webkit-scrollbar {
