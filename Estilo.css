@@ -342,8 +342,10 @@ textarea{
 	cursor: pointer;
 }
 
-#containerSalas{
-	display: inline;
+#modalEntrarSala{
+	background-color: rgba(0, 0, 0, 0.8);
+	padding: 5%;
+	z-index: 10;
 }
 
 #adicao{

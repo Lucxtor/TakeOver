@@ -60,9 +60,28 @@
 				<hr>
 				<div class="row" style="height: 20%;">
 					<div class="col-sm-2" id="divSalas">
-						<a href="">
-							<center><h1 id="adicao">+</h1></center>
-						</a>
+						<center><h1 id="adicao" data-toggle="modal" data-target="#entrarSala">+</h1></center>
+
+						<div class="modal fade" id="entrarSala" role="dialog">
+							<div class="modal-dialog modal-dialog-centered modal-lg">
+							    <div class="modal-content" id="modalEntrarSala">
+							        <div class="modal-header">
+							          <h4 class="modal-title">Entrar em uma sala</h4>
+							        </div>
+							        <div class="modal-body">
+							        	<p>Para entrar em uma sala peça para que seu professor te envie o código da sala e insira o mesmo no espaço abaixo:</p>
+							          <form>
+							          	<input type="text" name="codigo" id="inputCriarSala"><br><br>
+							          
+							        </div>
+							        <div class="modal-footer">
+							        	<input type="submit" name="enviar" id="inputCriarSala">
+							          </form>
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							        </div>
+							    </div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<center><h1>Salas que eu acompanho</h1></center>
