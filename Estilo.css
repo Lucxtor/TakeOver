@@ -127,7 +127,8 @@ hr{
 	border-style: solid;
 	border-width: 10px;
 	border-color: aquamarine;
-	background: none;
+	background-image: url(backgroundOpJogo.png);
+	background-size: 100% 100%;
 	width: 100%;
 	height: 100%;
 	padding: 4%;
@@ -136,8 +137,12 @@ hr{
 
 #opJogo:hover{
 	position: inherit;
-	background-color: aquamarine;
-	width: 130%;
+	border-style: solid;
+	border-width: 10px;
+	border-color: aquamarine;
+	background-image: url(backgroundOpJogoHover.png);
+	background-size: 100% 100%;
+	width: 105%;
 	height: 105%;
 	padding: 2%;
 	z-index: 10;
@@ -155,7 +160,8 @@ hr{
 	border-style: solid;
 	border-width: 10px;
 	border-color: red;
-	background: none;
+	background-image: url(backgroundOpCriarSala.png);
+	background-size: 100% 100%;
 	width: 100%;
 	height: 48%;
 	padding: 4%;
@@ -165,9 +171,13 @@ hr{
 
 #opCriarSala:hover{
 	position: inherit;
-	background-color: red;
-	width: 120%;
-	height: 55%;
+	border-style: solid;
+	border-width: 10px;
+	border-color: red;
+	background-image: url(backgroundOpCriarSalaHover.png);
+	background-size: 100% 100%;
+	width: 105%;
+	height: 53%;
 	padding: 2%;
 	transition: 0.3s ease-in;
 	z-index: 1;
@@ -203,8 +213,8 @@ hr{
 #opEntrarSala:hover{
 	position: inherit;
 	background-color: violet;
-	width: 120%;
-	height: 55%;
+	width: 105%;
+	height: 53%;
 	padding: 2%;
 	transition: 0.3s ease-in;
 	z-index: 1;
@@ -232,8 +242,8 @@ hr{
 	position: inherit;
 	background-color: dimgrey;
 	color: black;
-	width: 120%;
-	height: 30%;
+	width: 105%;
+	height: 27%;
 	padding: 4%;
 	transition: 0.3s ease-in;
 	z-index: 1;
