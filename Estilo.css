@@ -13,6 +13,10 @@ h1{
 h2{
 	color: white;
 }
+h3{
+	color: rgb(21, 69, 117);
+	text-shadow: 0px 0px white;
+}
 h4{
 	color: white;
 }
@@ -125,7 +129,7 @@ hr{
 
 #opJogo{
 	border-style: solid;
-	border-width: 10px;
+	border-width: 4px;
 	border-color: aquamarine;
 	background-image: url(backgroundOpJogo.png);
 	background-size: 100% 100%;
@@ -138,7 +142,7 @@ hr{
 #opJogo:hover{
 	position: inherit;
 	border-style: solid;
-	border-width: 10px;
+	border-width: 2px;
 	border-color: aquamarine;
 	background-image: url(backgroundOpJogoHover.png);
 	background-size: 100% 100%;
@@ -158,8 +162,8 @@ hr{
 
 #opCriarSala{
 	border-style: solid;
-	border-width: 10px;
-	border-color: red;
+	border-width: 4px;
+	border-color: aquamarine;
 	background-image: url(backgroundOpCriarSala.png);
 	background-size: 100% 100%;
 	width: 100%;
@@ -172,8 +176,8 @@ hr{
 #opCriarSala:hover{
 	position: inherit;
 	border-style: solid;
-	border-width: 10px;
-	border-color: red;
+	border-width: 2px;
+	border-color: aquamarine;
 	background-image: url(backgroundOpCriarSalaHover.png);
 	background-size: 100% 100%;
 	width: 105%;
@@ -200,9 +204,10 @@ hr{
 
 #opEntrarSala{
 	border-style: solid;
-	border-width: 10px;
-	border-color: violet;
-	background: none;
+	border-width: 4px;
+	border-color: aquamarine;
+	background-image: url(backgroundOpVerSalas.png);
+	background-size: 100% 100%;
 	width: 100%;
 	height: 48%;
 	padding: 2%;
@@ -212,7 +217,11 @@ hr{
 
 #opEntrarSala:hover{
 	position: inherit;
-	background-color: violet;
+	border-style: solid;
+	border-width: 2px;
+	border-color: aquamarine;
+	background-image: url(backgroundOpVerSalasHover.png);
+	background-size: 100% 100%;
 	width: 105%;
 	height: 53%;
 	padding: 2%;
@@ -228,8 +237,8 @@ hr{
 
 #eixo{
 	border-style: solid;
-	border-width: 10px;
-	border-color: dimgrey;
+	border-width: 4px;
+	border-color: aquamarine;
 	background: none;
 	width: 100%;
 	height: 22%;
@@ -240,10 +249,9 @@ hr{
 
 #eixo:hover{
 	position: inherit;
-	background-color: dimgrey;
-	color: black;
-	width: 105%;
-	height: 27%;
+	border-style: solid;
+	border-width: 2px;
+	border-color: aquamarine;
 	padding: 4%;
 	transition: 0.3s ease-in;
 	z-index: 1;
