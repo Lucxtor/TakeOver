@@ -1,2 +1,2 @@
 # TakeOver
- Uma abordagem pedagogica para ensino de geopolitica por meio de serious game
+ Uma abordagem pedagogica para ensino de ciencias humanas por meio de serious game
