@@ -130,7 +130,7 @@ hr{
 	border-style: solid;
 	border-width: 4px;
 	border-color: aquamarine;
-	background-image: url(backgroundOpJogo.png);
+	background-image: url(media/backgroundOpJogo.png);
 	background-size: 100% 100%;
 	width: 100%;
 	height: 100%;
@@ -143,7 +143,7 @@ hr{
 	border-style: solid;
 	border-width: 2px;
 	border-color: aquamarine;
-	background-image: url(backgroundOpJogoHover.png);
+	background-image: url(media/backgroundOpJogoHover.png);
 	background-size: 100% 100%;
 	width: 105%;
 	height: 105%;
@@ -163,7 +163,7 @@ hr{
 	border-style: solid;
 	border-width: 4px;
 	border-color: aquamarine;
-	background-image: url(backgroundOpCriarSala.png);
+	background-image: url(media/backgroundOpCriarSala.png);
 	background-size: 100% 100%;
 	width: 100%;
 	height: 48%;
@@ -177,7 +177,7 @@ hr{
 	border-style: solid;
 	border-width: 2px;
 	border-color: aquamarine;
-	background-image: url(backgroundOpCriarSalaHover.png);
+	background-image: url(media/backgroundOpCriarSalaHover.png);
 	background-size: 100% 100%;
 	width: 105%;
 	height: 53%;
@@ -205,7 +205,7 @@ hr{
 	border-style: solid;
 	border-width: 4px;
 	border-color: aquamarine;
-	background-image: url(backgroundOpVerSalas.png);
+	background-image: url(media/backgroundOpVerSalas.png);
 	background-size: 100% 100%;
 	width: 100%;
 	height: 48%;
@@ -219,7 +219,7 @@ hr{
 	border-style: solid;
 	border-width: 2px;
 	border-color: aquamarine;
-	background-image: url(backgroundOpVerSalasHover.png);
+	background-image: url(media/backgroundOpVerSalasHover.png);
 	background-size: 100% 100%;
 	width: 105%;
 	height: 53%;
