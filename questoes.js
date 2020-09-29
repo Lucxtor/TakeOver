@@ -1,12 +1,12 @@
-questions = [
+questoes = [
     {
-        "questao": "Oppression by corporations is more of a concern than oppression by governments.",
+        "question": "Oppression by corporations is more of a concern than oppression by governments.",
         "respostas": {
-            "concordoFortemente": "",
-            "concordo": "",
-            "neutro": "",
-            "discordo": "",
-            "discordoFortemente": ""
+            "concordoFortemente": "teste1",
+            "concordo": "teste2",
+            "neutro": "teste3",
+            "discordo": "teste4",
+            "discordoFortemente": "teste5"
         },
         "effect": {
             "econ": 10,

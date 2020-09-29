@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>TakeOver - Jogo</title>
+
+    <link rel="stylesheet" type="text/css" href="Estilo.css">
+
+    <script type="application/javascript"
+        src="questoes.js">
+	</script>
+
+  </head>
+  <body>
+	<div id="corpo">
+		<div class="row" id="sup">
+			<div class="col-sm-9"></div>
+			<div class="col-sm-2" id="user">
+				<a href="login.html"><img style="float: left;" src="https://freesvg.org/img/abstract-user-flat-3.png" width="30%" height="100%"><h1>User</h1></a>
+			</div>
+			<div class="col-sm-1" class="dropdown" id="op" style=" background-image: url(https://cdn.pixabay.com/photo/2016/11/08/00/30/gear-1807204_960_720.png); background-size: 100% 100%;">
+				<div class="opsOp">
+					<div id="op">
+						<a href="">
+							<h4>config</h4>
+						</a>
+					</div>
+					<hr>
+					<div id="op">
+						<a href="">
+							<h4>config 2</h4>
+						</a>
+					</div>
+					<hr>
+					<div id="op">
+						<a href="">
+							<h4>Créditos</h4>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="">
+			<div class="col-sm-12" style="text-orientation: center;">
+				<p id="numeroQuestao"></p> <br>
+			</div>
+			<div class="col-sm-12" style="text-orientation: center;">
+				<p id="contextoHistoria"></p> <br>
+			</div>
+			<div class="col-sm-12">
+				<button class="button" onclick="next_question( 1.0)" style="background-color: #1b5e20;" id="concordoFortemente">Concordo Fortemente</button> <br>
+				<button class="button" onclick="next_question( 0.5)" style="background-color: #4caf50;" id="concordo">Concordo</button> <br>
+				<button class="button" onclick="next_question( 0.0)" style="background-color: #bbbbbb;" id="neutro">Neutro</button> <br>
+				<button class="button" onclick="next_question(-0.5)" style="background-color: #f44336;" id="discordo">Discordo</button> <br>
+				<button class="button" onclick="next_question(-1.0)" style="background-color: #b71c1c;" id="discordoFortemente">Discordo Fortemente</button> <br>
+			</div>
+			<div class="col-sm-12">
+				<p id="fim"></p>
+			</div>
+		</div>
+	</div>
+	<video autoplay muted loop id="backgroundVideo" style="width: 100%; height: 100%;">
+  		<source src="Background.mp4" type="video/mp4">
+  		Your browser does not support HTML5 video.
+	</video>
+	<script type="text/javascript">
+		var vid = document.getElementById("backgroundVideo");
+		vid.playbackRate = 0.4;
+	</script>
+
+	<script>
+		var max_econ, max_dipl, max_govt, max_scty; // Pontuação máxima
+	    max_econ = max_dipl = max_govt = max_scty = 0;
+	    var econ, dipl, govt, scty; // Pontuação do usuário
+	    econ = dipl = govt = scty = 0;
+	    var nq = 0; // Número da questão
+	    var prev_answer = null;
+	    init_question();
+	    for (var i = 0; i < questoes.length; i++) {
+	        max_econ += Math.abs(questoes[i].effect.econ)
+	        max_dipl += Math.abs(questoes[i].effect.dipl)
+	        max_govt += Math.abs(questoes[i].effect.govt)
+	        max_scty += Math.abs(questoes[i].effect.scty)
+	    }
+	    function init_question() {
+	        document.getElementById("contextoHistoria").innerHTML = questoes[nq].question;
+	        document.getElementById("concordoFortemente").innerHTML = questoes[nq].respostas.concordoFortemente;
+	        document.getElementById("concordo").innerHTML = questoes[nq].respostas.concordo;
+	        document.getElementById("neutro").innerHTML = questoes[nq].respostas.neutro;
+	        document.getElementById("discordo").innerHTML = questoes[nq].respostas.discordo;
+	        document.getElementById("discordoFortemente").innerHTML = questoes[nq].respostas.discordoFortemente;
+	        document.getElementById("numeroQuestao").innerHTML = "Questão " + (nq + 1) + " de " + (questoes.length);
+	        if (prev_answer == null) {
+	            document.getElementById("back_button").style.display = 'none';
+	            document.getElementById("back_button_off").style.display = 'block';
+	        } else {
+	            document.getElementById("back_button").style.display = 'block';
+	            document.getElementById("back_button_off").style.display = 'none';
+	        }
+
+	    }
+
+	    function next_question(mult) {
+	        econ += mult*questoes[nq].effect.econ
+	        dipl += mult*questoes[nq].effect.dipl
+	        govt += mult*questoes[nq].effect.govt
+	        scty += mult*questoes[nq].effect.scty
+	        nq++;
+	        prev_answer = mult;
+	        if (nq < questoes.length) {
+	            init_question();
+	        } else {
+	        	document.getElementById("fim").innerHTML = "As questoes acabaram"
+	            // results();
+	        }
+	    }
+	    function prev_question() {
+	        if (prev_answer == null) {
+	            return;
+	        }
+	        nq--;
+	        econ -= prev_answer * questoes[nq].effect.econ;
+	        dipl -= prev_answer * questoes[nq].effect.dipl;
+	        govt -= prev_answer * questoes[nq].effect.govt;
+	        scty -= prev_answer * questoes[nq].effect.scty;
+	        prev_answer = null;
+	        init_question();
+
+	    }
+	    function calc_score(score,max) {
+	        return (100*(max+score)/(2*max)).toFixed(1)
+	    }
+	    function results() {
+	        location.href = `results.html`
+	            + `?e=${calc_score(econ,max_econ)}`
+	            + `&d=${calc_score(dipl,max_dipl)}`
+	            + `&g=${calc_score(govt,max_govt)}`
+	            + `&s=${calc_score(scty,max_scty)}`
+	    }
+	</script>
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
