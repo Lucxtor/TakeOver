@@ -13,7 +13,10 @@
     <link rel="stylesheet" type="text/css" href="Estilo.css">
 
     <script type="application/javascript"
-        src="questoes.js">
+        src="questoesEco.js">
+	</script>
+	<script type="application/javascript"
+        src="ideologies.js">
 	</script>
 
   </head>
@@ -46,22 +49,46 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" id="">
-			<div class="col-sm-12" style="text-orientation: center;">
+		<div id="menu">
+			<div>
 				<p id="numeroQuestao"></p> <br>
 			</div>
-			<div class="col-sm-12" style="text-orientation: center;">
+			<div>
 				<p id="contextoHistoria"></p> <br>
 			</div>
-			<div class="col-sm-12">
-				<button class="button" onclick="next_question( 1.0)" style="background-color: #1b5e20;" id="concordoFortemente">Concordo Fortemente</button> <br>
-				<button class="button" onclick="next_question( 0.5)" style="background-color: #4caf50;" id="concordo">Concordo</button> <br>
-				<button class="button" onclick="next_question( 0.0)" style="background-color: #bbbbbb;" id="neutro">Neutro</button> <br>
-				<button class="button" onclick="next_question(-0.5)" style="background-color: #f44336;" id="discordo">Discordo</button> <br>
-				<button class="button" onclick="next_question(-1.0)" style="background-color: #b71c1c;" id="discordoFortemente">Discordo Fortemente</button> <br>
+			<div class="row">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-2" style="cursor: pointer; color: white;" id="concordoFortemente" onclick="proximaQuestao( 1.0)"></div>
+				<div class="col-sm-2" style="cursor: pointer; color: white;" id="concordo" onclick="proximaQuestao( 0.5)"></div>
+				<div class="col-sm-2" style="cursor: pointer; color: white;" id="neutro" onclick="proximaQuestao( 0.0)"></div>
+				<div class="col-sm-2" style="cursor: pointer; color: white;" id="discordo" onclick="proximaQuestao( -0.5)"></div>
+				<div class="col-sm-2" style="cursor: pointer; color: white;" id="discordoFortemente" onclick="proximaQuestao( -1.0)"></div>
+				<div class="col-sm-1"></div>
 			</div>
-			<div class="col-sm-12">
-				<p id="fim"></p>
+		</div>
+		
+		<div class="modal fade" id="resultados" role="dialog">
+			<div class="modal-dialog modal-dialog-centered modal-lg">
+				<div class="modal-content" id="modalEntrarSala">
+			        <div class="modal-header">
+			        	<center><h1 class="modal-title">Resultado!</h1></center>
+			        </div>
+			        <div class="modal-body">
+			        	<h2 id="tituloEconomico">Eixo Economico: </h2>
+						<h4 id="eixoEconomico">--</h4>
+						<!--<h2 id="tituloDiplomatico">Eixo Diplomatico:</h2>
+						<h4 id="eixoDiplomatico">--</h4>
+						<h2 id="tituloCivil">Eixo Civil:</h2>
+						<h4 id="eixoCivil">--</h4>
+						<h2 id="tituloSocial">Eixo Social:</h2>
+						<h4 id="eixoSocial">--</h4>
+						<hr>
+						<h2 id="ideologia"></h2>-->
+					</div>
+			        <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			    </div>
 			</div>
 		</div>
 	</div>
@@ -75,48 +102,76 @@
 	</script>
 
 	<script>
+		vetorEconomico = ["Comunista","Socialista","Social","Centrista","Mercado","Capitalista","Liberalista"]
+    	vetorDiplomatico = ["Cosmopolita","Internacionalista","Pacifista","Balanceado","Patriótico","Nacionalista","Chauvinista"]
+    	vetorCivico = ["Anarquista","Libertário","Liberal","Moderado","Estadista","Autoritário","Totalitarista"]
+    	vetorSocial = ["Revolucionário","Muito Progressista","Progressista","Neutro","Conservador","Muito Conservador","Reacionário"]
+
 		var max_econ, max_dipl, max_govt, max_scty; // Pontuação máxima
 	    max_econ = max_dipl = max_govt = max_scty = 0;
 	    var econ, dipl, govt, scty; // Pontuação do usuário
 	    econ = dipl = govt = scty = 0;
-	    var nq = 0; // Número da questão
-	    var prev_answer = null;
+	    var pq = 0; // Número da questão
+	    // var prev_answer = null;
 	    init_question();
-	    for (var i = 0; i < questoes.length; i++) {
-	        max_econ += Math.abs(questoes[i].effect.econ)
-	        max_dipl += Math.abs(questoes[i].effect.dipl)
-	        max_govt += Math.abs(questoes[i].effect.govt)
-	        max_scty += Math.abs(questoes[i].effect.scty)
+	    for (var i = 0; i < questoesEco.length; i++) {
+	        max_econ += Math.abs(questoesEco[i].effect.econ)
+	        max_dipl += Math.abs(questoesEco[i].effect.dipl)
+	        max_govt += Math.abs(questoesEco[i].effect.govt)
+	        max_scty += Math.abs(questoesEco[i].effect.scty)
 	    }
 	    function init_question() {
-	        document.getElementById("contextoHistoria").innerHTML = questoes[nq].question;
-	        document.getElementById("concordoFortemente").innerHTML = questoes[nq].respostas.concordoFortemente;
-	        document.getElementById("concordo").innerHTML = questoes[nq].respostas.concordo;
-	        document.getElementById("neutro").innerHTML = questoes[nq].respostas.neutro;
-	        document.getElementById("discordo").innerHTML = questoes[nq].respostas.discordo;
-	        document.getElementById("discordoFortemente").innerHTML = questoes[nq].respostas.discordoFortemente;
-	        document.getElementById("numeroQuestao").innerHTML = "Questão " + (nq + 1) + " de " + (questoes.length);
-	        if (prev_answer == null) {
+	        document.getElementById("contextoHistoria").innerHTML = questoesEco[pq].question;
+	        document.getElementById("concordoFortemente").innerHTML = questoesEco[pq].respostas.concordoFortemente;
+	        document.getElementById("concordo").innerHTML = questoesEco[pq].respostas.concordo;
+	        document.getElementById("neutro").innerHTML = questoesEco[pq].respostas.neutro;
+	        document.getElementById("discordo").innerHTML = questoesEco[pq].respostas.discordo;
+	        document.getElementById("discordoFortemente").innerHTML = questoesEco[pq].respostas.discordoFortemente;
+	        document.getElementById("numeroQuestao").innerHTML = "Questão " + (pq + 1) + " de " + (questoesEco.length);
+	        /*if (prev_answer == null) {
 	            document.getElementById("back_button").style.display = 'none';
 	            document.getElementById("back_button_off").style.display = 'block';
 	        } else {
 	            document.getElementById("back_button").style.display = 'block';
 	            document.getElementById("back_button_off").style.display = 'none';
-	        }
-
+	        }*/
 	    }
 
-	    function next_question(mult) {
-	        econ += mult*questoes[nq].effect.econ
-	        dipl += mult*questoes[nq].effect.dipl
-	        govt += mult*questoes[nq].effect.govt
-	        scty += mult*questoes[nq].effect.scty
-	        nq++;
+	    function proximaQuestao(mult) {
+	        econ += mult*questoesEco[pq].effect.econ
+	        dipl += mult*questoesEco[pq].effect.dipl
+	        govt += mult*questoesEco[pq].effect.govt
+	        scty += mult*questoesEco[pq].effect.scty
+	        pq++;
 	        prev_answer = mult;
-	        if (nq < questoes.length) {
+	        if (pq < questoesEco.length) {
 	            init_question();
 	        } else {
-	        	document.getElementById("fim").innerHTML = "As questoes acabaram"
+	        	ideologia = ""
+		    	ideodist = Infinity
+		    	for (var i = 0; i < ideologies.length; i++) {
+		        	dist = 0
+		        	dist += Math.pow(Math.abs(ideologies[i].stats.econ - calc_pontuacao(econ,max_econ)), 2)
+		        	dist += Math.pow(Math.abs(ideologies[i].stats.govt - calc_pontuacao(govt,max_govt)), 2)
+		        	dist += Math.pow(Math.abs(ideologies[i].stats.dipl - calc_pontuacao(dipl,max_dipl)), 1.73856063)
+		        	dist += Math.pow(Math.abs(ideologies[i].stats.scty - calc_pontuacao(scty,max_scty)), 1.73856063)
+		        	if (dist < ideodist) {
+		            	ideologia = ideologies[i].name
+		            	ideodist = dist
+		        	}
+		    	}
+			    //document.getElementById("ideologia").innerHTML = ideologia
+
+	        	document.getElementById("tituloEconomico").innerHTML = "Eixo Econômico: " + definirTitulo(calc_pontuacao(econ,max_econ),vetorEconomico)
+	        	document.getElementById("eixoEconomico").innerHTML = "Igualdade " + calc_pontuacao(econ,max_econ) + "% : " + (100 - calc_pontuacao(econ,max_econ)) + "% Mercado"
+	        	/*document.getElementById("tituloDiplomatico").innerHTML = "Eixo Diplomático: " + definirTitulo(calc_pontuacao(dipl,max_dipl),vetorDiplomatico)
+	        	document.getElementById("eixoDiplomatico").innerHTML = "Globalização " + calc_pontuacao(dipl,max_dipl) + "% : " + (100 - calc_pontuacao(dipl,max_dipl)) + "% Nacionalismo"
+	        	document.getElementById("tituloCivil").innerHTML = "Eixo Civil: " + definirTitulo(calc_pontuacao(govt,max_govt),vetorCivico)
+	        	document.getElementById("eixoCivil").innerHTML = "Liberdade " + calc_pontuacao(govt,max_govt) + "% : " + (100 - calc_pontuacao(govt,max_govt)) + "% Autoridade"
+	        	document.getElementById("tituloSocial").innerHTML = "Eixo Social: " + definirTitulo(calc_pontuacao(scty,max_scty),vetorSocial)
+	        	document.getElementById("eixoSocial").innerHTML = "Progresso " + calc_pontuacao(scty,max_scty) + "% : " + (100 - calc_pontuacao(scty,max_scty)) + "% Tradição"*/
+	        	$("#resultados").modal("show");
+	        	//document.getElementById("fim").innerHTML = "As questoesEco acabaram, Seu resultado dentro do eixo economico foi: " + calc_pontuacao(econ,max_econ) + "% para Igualdade e " + (100 - calc_pontuacao(econ,max_econ)) + "% para Mercado"
 	            // results();
 	        }
 	    }
@@ -124,25 +179,31 @@
 	        if (prev_answer == null) {
 	            return;
 	        }
-	        nq--;
-	        econ -= prev_answer * questoes[nq].effect.econ;
-	        dipl -= prev_answer * questoes[nq].effect.dipl;
-	        govt -= prev_answer * questoes[nq].effect.govt;
-	        scty -= prev_answer * questoes[nq].effect.scty;
+	        pq--;
+	        econ -= prev_answer * questoesEco[pq].effect.econ;
+	        dipl -= prev_answer * questoesEco[pq].effect.dipl;
+	        govt -= prev_answer * questoesEco[pq].effect.govt;
+	        scty -= prev_answer * questoesEco[pq].effect.scty;
 	        prev_answer = null;
 	        init_question();
 
 	    }
-	    function calc_score(score,max) {
-	        return (100*(max+score)/(2*max)).toFixed(1)
+	    function calc_pontuacao(pontuacao,max) {
+	        return (100*(max+pontuacao)/(2*max)).toFixed(1)
 	    }
-	    function results() {
-	        location.href = `results.html`
-	            + `?e=${calc_score(econ,max_econ)}`
-	            + `&d=${calc_score(dipl,max_dipl)}`
-	            + `&g=${calc_score(govt,max_govt)}`
-	            + `&s=${calc_score(scty,max_scty)}`
-	    }
+
+	    function definirTitulo(intervalo,posicao) {
+        	if (intervalo > 100) { return "" } else
+        	if (intervalo > 90) { return posicao[0] } else
+        	if (intervalo > 75) { return posicao[1] } else
+        	if (intervalo > 60) { return posicao[2] } else
+        	if (intervalo >= 40) { return posicao[3] } else
+        	if (intervalo >= 25) { return posicao[4] } else
+        	if (intervalo >= 10) { return posicao[5] } else
+        	if (intervalo >= 0) { return posicao[6] } else
+        		{return ""}
+    	}
+
 	</script>
 
     <!-- JavaScript (Opcional) -->

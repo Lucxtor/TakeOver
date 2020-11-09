@@ -18,11 +18,11 @@ questoes = [
     {
         "question": "It is necessary for the government to intervene in the economy to protect consumers.",
         "respostas": {
-            "concordoFortemente": "",
-            "concordo": "",
-            "neutro": "",
-            "discordo": "",
-            "discordoFortemente": ""
+            "concordoFortemente": "askjfasf",
+            "concordo": "asfsfd",
+            "neutro": "asdgafdg",
+            "discordo": "dsgasd",
+            "discordoFortemente": "sdagf"
         },
         "effect": {
             "econ": 10,
