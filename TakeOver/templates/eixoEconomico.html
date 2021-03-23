@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    {% include "model-head.html" %}
+  	{% load static %}
+  </head>
+  <body>
+	<div id="corpo">
+		{% include "model-superior.html" %}
+		<div class="row" id="menu">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<center><h1 id="titulo">Eixo Economico</h1></center>
+				<img src="{% static 'media/economicoEixo.png' %}" id="imgEixos">
+				<div class="row">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-3">
+						<center>
+							<p><h4>Aqueles com uma pontuação maior em Igualdade acreditam que a economia deve distribuir valor igualmente entre a população. Estes tendem a apoiar leis tributárias progressivas, programas sociais, e no geral, socialismo.</h4></p>
+						</center>
+					</div>
+					<div class="col-sm-2"></div>
+					<div class="col-sm-3">
+							<center>
+							<p><h4>Aqueles com uma pontuação maior em Mercado acreditam que a economia deve focar em crescimento rápido. Estes tendem a apoiar impostos mais baixos, privatização, desregulamentação, e no geral, capitalismo laissez-faire (liberalismo).</h4></p>
+						</center>
+					</div>
+					<div class="col-sm-2"></div>
+				</div>
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+	</div>
+	<video autoplay muted loop id="backgroundVideo" style="width: 100%; height: 100%;">
+		<source src="{% static 'media/Background.mp4' %}" type="video/mp4">
+  		Your browser does not support HTML5 video.
+	</video>
+	<script type="text/javascript">
+		var vid = document.getElementById("backgroundVideo");
+		vid.playbackRate = 0.4;
+	</script>
+
+  </body>
+</html>

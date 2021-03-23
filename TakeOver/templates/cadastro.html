@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'Estilo.css' %}">
+
+    <title>Login</title>
+
+    <style type="text/css">
+    	::-webkit-input-placeholder {
+   		color: black;
+		}
+    </style>
+
+  </head>
+  <body>
+	<div id="corpo">
+		<div style="height: 5%;">
+		</div>
+		<div class="row" id="menu">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4" id="menuClaroArredondado">
+				<h1 style="font-size: 50px; font-weight: bolder;">Cadastrar-se</h1>
+				<br><br>
+				<form method="POST" action="submit">{% csrf_token %}
+					<input id="inputLogin" type="text" name="username" placeholder="Nome de usuario">
+					{{ form_usuario.username.errors }}
+					<br><br>
+					<input id="inputLogin" type="text" name="email" placeholder="Email">
+					<br><br>
+					<input id="inputLogin" type="password" name="password1" placeholder="Senha">
+					{{form_usuario.password1.errors}}
+					<br><br>
+					<input id="inputLogin" type="password" name="password2" placeholder="Confirmar Senha">
+					{{form_usuario.password2.errors}}
+					<br><br>
+					{% for message in messages %}
+						<h5>{{ message }}</h5>
+					{% endfor %}
+					<br><br>
+					<input id="inputLogin" type="submit" name="Enviar" value="Cadastrar-se">
+				</form>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+	</div>
+	<video autoplay muted loop id="backgroundVideo">
+		<source src="{% static 'media/Background.mp4' %}" type="video/mp4">
+  		Your browser does not support HTML5 video.
+	</video>
+	<script type="text/javascript">
+		var vid = document.getElementById("backgroundVideo");
+		vid.playbackRate = 0.4;
+	</script>
+
+   </body>
+</html>

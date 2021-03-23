@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    {% include "model-head.html" %}
+  	{% load static %}
+  </head>
+  <body>
+	<div id="corpo">
+		{% include "model-superior.html" %}
+		<div class="row" id="menu">
+			<div class="col-sm-4" id="jogo">
+				<a href="Jogar">
+					<div id="opJogo">
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-4" id="sala">
+				<a href="criarSala_cadastro">
+					<div id="opCriarSala">
+					</div>
+				</a>
+				<br>
+				<a href="minhasSalas">
+					<div id="opEntrarSala">
+					</div>
+				</a>
+			</div>
+			<div class="col-sm-4" id="eixos">
+				<a href="eixoEconomico">
+					<div id="eixo" style="background-image: url({% static 'media/backgroundOpEixoEconomico.png' %}); background-size: 100% 100%;">
+					</div>
+				</a>
+				<br>
+				<a href="eixoDiplomatico">
+					<div id="eixo" style="background-image: url({% static 'media/backgroundOpEixoDiplomatico.png' %}); background-size: 100% 100%;">
+					</div>
+				</a>
+				<br>
+				<a href="eixoCivil">
+					<div id="eixo" style="background-image: url({% static 'media/backgroundOpEixoCivil.png' %}); background-size: 100% 100%;">
+					</div>
+				</a>
+				<br>
+				<a href="eixoSocial">
+					<div id="eixo" style="background-image: url({% static 'media/backgroundOpEixoSocial.png' %}); background-size: 100% 100%;">
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<video autoplay muted loop id="backgroundVideo" style="width: 100%; height: 100%;">
+		<source src="{% static 'media/Background.mp4' %}" type="video/mp4">
+  		Your browser does not support HTML5 video.
+	</video>
+	<script type="text/javascript">
+		var vid = document.getElementById("backgroundVideo");
+		vid.playbackRate = 0.4;
+	</script>
+
+  </body>
+</html>

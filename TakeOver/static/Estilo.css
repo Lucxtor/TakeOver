@@ -1,0 +1,406 @@
+html, body { 
+	height: 100%;
+}
+
+body{
+	height: 100%;
+	background-color: black;
+}
+
+h1{
+	color: white;
+}
+h2{
+	color: white;
+}
+h3{
+	color: rgb(21, 69, 117);
+	text-shadow: 0px 0px white;
+}
+h4{
+	color: white;
+}
+
+a:link{
+	position: inherit;
+	text-decoration: none;
+	color: inherit;
+}
+
+p{
+	color: white;
+}
+
+label{
+	color: white;
+}
+
+hr{
+	border-color: aquamarine;
+}
+
+#inputLogin{
+	text-align: center;
+	height: 10%;
+	width: 90%;
+	background: none;
+	border-width: 5px;
+	border-style: solid;
+	border-radius: 15px;
+	padding: 2%;
+	color: black;
+	font-size: 100%;
+	font-weight: bolder;
+	outline: none;
+}
+::-webkit-input-placeholder {
+   color: white;
+}
+#inputLogin[type=submit]{
+	padding: 2%;
+	color: white;
+	cursor: pointer;
+}
+
+#backgroundVideo{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+#corpo{
+	background-color: rgba(0, 0, 0, 0.8);
+	width: 100%;
+	height: 100%;
+	padding: 3%;
+}
+
+#sup{
+	height: 10%
+}
+
+#user{
+	border-style: solid;
+	border-width: 4px;
+	border-color: aquamarine;
+	width: 100%;
+	height: 100%;
+}
+
+#op{
+	border-style: solid;
+	border-width: 4px;
+	border-color: aquamarine;
+	padding: 1%;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+#op:hover .opsOp {
+	visibility: visible;
+}
+
+.opsOp{
+	position: absolute;
+	top: 100%;
+	left: -50%;
+	background-color: darkgrey;
+	width: 150%;
+	padding: 2%;
+	visibility: hidden;
+	z-index: 5;
+}
+
+#menu{
+	height: 90%;
+	padding: 2%;
+}
+
+#jogo{
+	width: 100%;
+	height: 100%;
+	padding: 2%;
+}
+
+#opJogo{
+	border-style: solid;
+	border-width: 4px;
+	border-color: aquamarine;
+	background-image: url(media/backgroundOpJogo.png);
+	background-size: 100% 100%;
+	width: 100%;
+	height: 100%;
+	padding: 4%;
+	transition: 0.5s ease-in;
+}
+
+#opJogo:hover{
+	position: inherit;
+	border-style: solid;
+	border-width: 2px;
+	border-color: aquamarine;
+	background-image: url(media/backgroundOpJogoHover.png);
+	background-size: 100% 100%;
+	width: 105%;
+	height: 105%;
+	padding: 2%;
+	z-index: 10;
+	transition: 0.3s ease-in;
+	z-index: 2;
+}
+
+#opJogoSala{
+	border-style: solid;
+	border-width: 4px;
+	border-color: aquamarine;
+	background-size: 100% 100%;
+	width: 100%;
+	height: 100%;
+	padding: 4%;
+	transition: 0.5s ease-in;
+}
+
+#opJogoSala:hover{
+	position: inherit;
+	border-style: solid;
+	border-width: 2px;
+	border-color: aquamarine;
+	background-size: 100% 100%;
+	width: 100%;
+	height: 105%;
+	padding: 2%;
+	z-index: 10;
+	transition: 0.3s ease-in;
+	z-index: 2;
+}
+
+#sala{
+	width: 100%;
+	height: 100%;
+	padding: 2%;
+}
+
+#opCriarSala{
+	border-style: solid;
+	border-width: 4px;
+	border-color: aquamarine;
+	background-image: url(media/backgroundOpCriarSala.png);
+	background-size: 100% 100%;
+	width: 100%;
+	height: 48%;
+	padding: 4%;
+	transition: 0.5s ease-in;
+	z-index: 0;
+}
+
+#opCriarSala:hover{
+	position: inherit;
+	border-style: solid;
+	border-width: 2px;
+	border-color: aquamarine;
+	background-image: url(media/backgroundOpCriarSalaHover.png);
+	background-size: 100% 100%;
+	width: 105%;
+	height: 53%;
+	padding: 2%;
+	transition: 0.3s ease-in;
+	z-index: 1;
+}
+
+#opCriarSala:hover .opBaixa{
+	visibility: visible;
+}
+
+.opBaixa{
+	position: absolute;
+	background-color: grey;
+	width: 104%;
+	height: 15%;
+	visibility: hidden;
+	left: -2%;
+	bottom: -2%;
+	z-index: 1;
+}
+
+#opEntrarSala{
+	border-style: solid;
+	border-width: 4px;
+	border-color: aquamarine;
+	background-image: url(media/backgroundOpVerSalas.png);
+	background-size: 100% 100%;
+	width: 100%;
+	height: 48%;
+	padding: 2%;
+	transition: 0.5s ease-in;
+	z-index: 0;
+}
+
+#opEntrarSala:hover{
+	position: inherit;
+	border-style: solid;
+	border-width: 2px;
+	border-color: aquamarine;
+	background-image: url(media/backgroundOpVerSalasHover.png);
+	background-size: 100% 100%;
+	width: 105%;
+	height: 53%;
+	padding: 2%;
+	transition: 0.3s ease-in;
+	z-index: 1;
+}
+
+#eixos{
+	width: 100%;
+	height: 100%;
+	padding: 2%;
+}
+
+#eixo{
+	border-style: solid;
+	border-width: 4px;
+	border-color: aquamarine;
+	background: none;
+	width: 100%;
+	height: 22%;
+	padding: 4%;
+	transition: 0.5s ease-in;
+	z-index: 0;
+}
+
+#eixo:hover{
+	position: inherit;
+	border-style: solid;
+	border-width: 2px;
+	border-color: aquamarine;
+	padding: 4%;
+	transition: 0.3s ease-in;
+	z-index: 1;
+}
+
+#titulo{
+	padding-bottom: 2%;
+	font-size: 300%;
+}
+
+#menuClaroArredondado{
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 10%;
+	text-align: center;
+	padding: 3%;
+}
+
+.alturaCarrossel{
+	height: 70%;
+}
+
+.alturaCarrosselInterno{
+	height: 100%;
+}
+
+#opsSala{
+	height: 100%;
+	width: 83%;
+	border-style: solid;
+	border-color: aqua;
+	cursor: pointer;
+}
+
+#opsControles{
+	cursor: pointer;
+}
+
+#inputCriarSala{
+	text-align: center;
+	height: 10%;
+	width: 100%;
+	background: none;
+	border-width: 5px;
+	border-style: solid;
+	border-radius: 15px;
+	padding: 1%;
+	color: white;
+	font-size: 100%;
+	font-weight: bolder;
+	outline: none;
+}
+
+#linkSala{
+	background-color: rgba(255, 255, 255, 0.5);
+	height: 10%;
+	padding: 1.5%;
+	border-radius: 12px;
+}
+
+input[type=checkbox]{
+	height: 50%;
+	width: auto;
+}
+
+input[type=number]{
+	text-align: center;
+	height: 10%;
+	width: 20%;
+	background: none;
+	border-width: 5px;
+	border-style: solid;
+	border-radius: 15px;
+	padding: 1%;
+	color: white;
+	font-size: 100%;
+	font-weight: bolder;
+	outline: none;
+}
+
+textarea{
+	height: 20%;
+	width: 100%;
+	background: none;
+	border-width: 5px;
+	border-style: solid;
+	border-radius: 15px;
+	padding: 1%;
+	color: white;
+	font-size: 100%;
+	font-weight: bolder;
+	outline: none;
+}
+
+#imgEixos{
+	width: 100%;
+	height: auto;
+}
+
+#divSalas{
+	height: 100%;
+	width: 100%;
+	background: none;
+	border-style: solid;
+	border-width: 5px;
+	border-color: white;
+	cursor: pointer;
+}
+
+#modalEntrarSala{
+	background-color: rgba(0, 0, 0, 0.8);
+	padding: 5%;
+	z-index: 10;
+}
+
+#adicao{
+	font-size: 90px;
+	font-weight: bold;
+}
+
+#mensagens{
+    background-color: white;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+

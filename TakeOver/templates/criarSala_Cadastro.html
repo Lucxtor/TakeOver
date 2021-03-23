@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    {% include "model-head.html" %}
+  	{% load static %}
+  </head>
+  <body>
+	<div id="corpo">
+		{% include "model-superior.html" %}
+		<div class="row" id="menu">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<h2>
+					Agora que ja temos um tema e ja definimos quais questões vão aparecer precisamos fechar o cadastro então são só algumas questões e estaremos prontos para prossegir!
+				</h2>
+				<form method="POST" action="criarSala_cadastro/submit"> {% csrf_token %}
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="nomeSala"><h4>Defina um nome para a sua sala:</h4></label><br><br><br>
+							<label for="diciplina"><h4> Escolha qual a diciplina foco que você pretende ensinar:</h4></label><br><br><br>
+							<label for="conteudo"><h4>Escolha qual o conteudo foco que você pretende ensinar:</h4></label><br><br><br><br>
+							<label for="desc"><h4>Escreva uma descrição da aula que pretende fazer:</h4></label><br><br><br><br><br>
+							<div class="row">
+								<div class="col-sm-1">
+									<input type="checkbox" name="opCompartilhar" checked>
+								</div>
+								<div class="col-sm-11">
+									<label for="opCompartilhar"><h4>Mantenha selecionado para que outras pessoas possam ver sua proposta de aula e utilizar como inspiração</h4></label>
+									<p>*essa opção não permite que outras pessoas entrem na sua sala, permite apenas a visualização, vamos compartilhar ideias e conhecimentos ;)</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<input id="inputCriarSala" type="text" name="nomeSala" placeholder="Nome da sala">
+							<br><br>
+							<input id="inputCriarSala" type="text" name="disciplina" placeholder="Diciplina">
+							<br><br>
+							<input id="inputCriarSala" type="text" name="conteudo" placeholder="Conteudo">
+							<br><br>
+							<br>
+							<textarea name="desc" placeholder="Descrição da aula"> </textarea>
+							<br><br><br><br>
+							<input id="inputLogin" type="submit" name="enviar">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+	</div>
+	<video autoplay muted loop id="backgroundVideo">
+		<source src="{% static 'media/Background.mp4' %}" type="video/mp4">
+  		Your browser does not support HTML5 video.
+	</video>
+	<script type="text/javascript">
+		var vid = document.getElementById("backgroundVideo");
+		vid.playbackRate = 0.4;
+	</script>
+
+    </body>
+</html>

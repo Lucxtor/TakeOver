@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    {% include "model-head.html" %}
+  	{% load static %}
+  </head>
+  <body>
+	<div id="corpo">
+		{% include "model-superior.html" %}
+		{% for sala in sala %}
+			<div id="menu">
+				<div style="text-align: center;"><h2> {{ sala.nome_sala }} </h2></div>
+				<div class="row" id="menu">
+					<div class="col-sm-3" id="mensagens" style="background-color: rgba(255, 255, 255, 0.2); border-radius: 5%;">
+						<center><h2>Bate-Papo</h2></center>
+						<div style="height: 80%;">
+						</div>
+						<div class="row" style="height: 20%;">
+							<form method="POST" action="submit" style="display: inline-block;"> {% csrf_token %}
+								<div class="col-sm-6"><input style="border-radius: 10px;" type="text" name="mensagem"></div>
+								<div class="col-sm-3"><input style="border-radius: 10px;" type="submit" name="enviar" value="Enviar"></div>
+							</form>
+						</div>
+					</div>
+					<div class="col-sm-6" id="">
+						<div class="row h-90" id="menu">
+							<div class="col-sm-12 h-25">
+								<a href="/Jogar">
+									<div id="opJogoSala" class="h-100" style="text-align: center;">
+										<h1>Jogar</h1>
+									</div>
+								</a>
+							</div>
+							<div>
+								<p>
+									{{ sala.desc_sala }}
+								</p>
+
+							</div>
+						</div>
+						<div style="text-align: right;">
+							<p>
+								Sala de {{ sala.adm_sala }}
+							</p>
+							{% if user.id == sala.adm_sala.id %}
+								<a href="submit_apagarSala"><p>Apagar</p></a>
+							{% else %}
+								<p>Sair</p>
+							{% endif %}
+						</div>
+					</div>
+					<div class="col-sm-3" id="conquisatas" style="background-color: rgba(255, 255, 255, 0.2); border-radius: 5%;">
+						<center><h2>Conquistas da turma</h2></center>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<video autoplay muted loop id="backgroundVideo" style="width: 100%; height: 100%;">
+		<source src="{% static 'media/Background.mp4' %}" type="video/mp4">
+  		Your browser does not support HTML5 video.
+	</video>
+	<script type="text/javascript">
+		var vid = document.getElementById("backgroundVideo");
+		vid.playbackRate = 0.4;
+	</script>
+
+  </body>
+</html>

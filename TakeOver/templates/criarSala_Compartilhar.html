@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    {% include "model-head.html" %}
+  	{% load static %}
+  </head>
+  <body>
+	<div id="corpo">
+		{% include "model-superior.html" %}
+		<div class="row" id="menu">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<h2>Verifique as informações da sua sala!</h2>
+				<br>
+				{% for minhaSala in minhaSala %}
+					<h2>{{minhaSala.nome_sala}}</h2>
+					<p><h2>{{ minhaSala.disciplina.nome_disc }} - {{ minhaSala.conteudo_sala }}</h2></p>
+					<p>{{ minhaSala.desc_sala }}</p><br><br>
+					<h2>Tudo certo? Então é só compartilhar o código abaixo:</h2>
+					<div id="linkSala">
+						<h2>{{ minhaSala.codigo_sala }}</h2>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+	</div>
+	<video autoplay muted loop id="backgroundVideo">
+		<source src="{% static 'media/Background.mp4' %}" type="video/mp4">
+  		Your browser does not support HTML5 video.
+	</video>
+	<script type="text/javascript">
+		var vid = document.getElementById("backgroundVideo");
+		vid.playbackRate = 0.4;
+	</script>
+
+   </body>
+</html>
