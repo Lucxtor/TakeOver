@@ -11,33 +11,35 @@
 			<div style="text-align: center;"><h2> Perfil de {{ user.username }} </h2></div>
 			<div class="row" id="menu">
 				<div class="col-sm-3" id="resultado" style="">
-					<center><h2>Ultimo resultado:</h2></center>
-					<hr>
-					<h2 id="ideologia">Ideologia</h2>
-					<hr>
-					<h4>Eixo Economico:</h4>
-					<div class="progress">
-					  <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-					  <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-					<br>
-					<h4>Eixo Civil:</h4>
-					<div class="progress">
-					  <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-					  <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-					<br>
-					<h4>Eixo Social:</h4>
-					<div class="progress">
-					  <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-					  <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-					<br>
-					<h4>Eixo Diplomatico:</h4>
-					<div class="progress">
-					  <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-					  <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
+					{% for resultado in resultados %}
+						<center><h2>Ultimo resultado:</h2></center>
+						<hr>
+						<h2 id="ideologia">Ideologia</h2>
+						<hr>
+						<h4>Eixo Economico:</h4>
+						<div class="progress">
+						  <div class="progress-bar" role="progressbar" style="width: {{ resultado.eixoEconomico_resultado|floatformat:0 }}%" aria-valuenow="{{ resultado.eixoEconomico_resultado|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">Igualdade {{ resultado.eixoEconomico_resultado }}%</div>
+						  <div class="progress-bar bg-success" role="progressbar" id="barEco" style="width: %" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<br>
+						<h4>Eixo Civil:</h4>
+						<div class="progress">
+						  <div class="progress-bar" role="progressbar" style="width: {{ resultado.eixoCivil_resultado|floatformat:0 }}%" aria-valuenow="{{ resultado.eixoCivil_resultado|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">Liberdade {{ resultado.eixoCivil_resultado }}%</div>
+						  <div class="progress-bar bg-success" role="progressbar" id="barCiv" style="width: %" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<br>
+						<h4>Eixo Social:</h4>
+						<div class="progress">
+						  <div class="progress-bar" role="progressbar" style="width: {{ resultado.eixoSocial_resultado|floatformat:0 }}%" aria-valuenow="{{ resultado.eixoSocial_resultado|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">Progresso {{ resultado.eixoSocial_resultado }}%</div>
+						  <div class="progress-bar bg-success" role="progressbar" id="barSoc" style="width: %" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+						<br>
+						<h4>Eixo Diplomatico:</h4>
+						<div class="progress">
+						  <div class="progress-bar" role="progressbar" style="width: {{ resultado.eixoDiplomatico_resultado|floatformat:0 }}%" aria-valuenow="{{ resultado.eixoDiplomatico_resultado|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">Globalização {{ resultado.eixoDiplomatico_resultado }}%</div>
+						  <div class="progress-bar bg-success" role="progressbar" id="barDip" style="width: %" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					{% endfor %}
 				</div>
 				<div class="col-sm-6" id="">
 					<div class="row h-50">
@@ -56,8 +58,6 @@
 								{% for message in messages %}
 									<h5>{{ message }}</h5>
 								{% endfor %}
-								<br><br>
-								<input id="inputLogin" type="submit" name="Enviar" value="Entrar">
 							</form>
 							</div>
 					</div>
@@ -75,6 +75,29 @@
 	<script type="text/javascript">
 		var vid = document.getElementById("backgroundVideo");
 		vid.playbackRate = 0.4;
+	</script>
+  	<script>
+  		{% for resultado in resultados %}
+  			eco = {{ resultado.eixoEconomico_resultado }};
+			civ = {{ resultado.eixoCivil_resultado }};
+			soc = {{ resultado.eixoSocial_resultado }};
+			dip = {{ resultado.eixoDiplomatico_resultado }};
+  			calculaEixo(eco, civ, soc, dip);
+  		{% endfor %}
+		function calculaEixo(eco, civ, soc, dip) {
+			document.getElementById("barEco").innerHTML = "" + ( 100 - eco) + "% Mercado";
+			document.getElementById("barCiv").innerHTML = "" + ( 100 - civ) + "% Autoridade";
+			document.getElementById("barSoc").innerHTML = "" + ( 100 - soc) + "% Tradição";
+			document.getElementById("barDip").innerHTML = "" + ( 100 - dip) + "% Nacionalismo";
+			document.getElementById("barEco").style.width = (( 100 - eco) + '%');
+			document.getElementById("barCiv").style.width = (( 100 - civ) + '%');
+			document.getElementById("barSoc").style.width = (( 100 - soc) + '%');
+			document.getElementById("barDip").style.width = (( 100 - dip) + '%');
+			document.getElementById("barEco").setAttribute('aria-valuenow', ( 100 - eco));
+			document.getElementById("barCiv").setAttribute('aria-valuenow', ( 100 - civ));
+			document.getElementById("barSoc").setAttribute('aria-valuenow', ( 100 - soc));
+			document.getElementById("barDip").setAttribute('aria-valuenow', ( 100 - dip));
+		}
 	</script>
 
   </body>

@@ -4,7 +4,7 @@
     {% include "model-head.html" %}
 	  {% load static %}
  	 <script type="application/javascript"
-		src="{% static 'questoesEco.js' %}">
+		src="{% static 'questoes.js' %}">
 	</script>
 	<script type="application/javascript"
 		src="{% static 'ideologies.js' %}">
@@ -22,11 +22,11 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-1"></div>
-				<div class="col-sm-2" style="cursor: pointer; color: white;" id="concordoFortemente" onclick="proximaQuestao( 1.0)"></div>
-				<div class="col-sm-2" style="cursor: pointer; color: white;" id="concordo" onclick="proximaQuestao( 0.5)"></div>
-				<div class="col-sm-2" style="cursor: pointer; color: white;" id="neutro" onclick="proximaQuestao( 0.0)"></div>
-				<div class="col-sm-2" style="cursor: pointer; color: white;" id="discordo" onclick="proximaQuestao( -0.5)"></div>
-				<div class="col-sm-2" style="cursor: pointer; color: white;" id="discordoFortemente" onclick="proximaQuestao( -1.0)"></div>
+				<div class="col-sm-2" style="cursor: pointer; color: white; min-height: 200px;" id="concordoFortemente" onclick="proximaQuestao( 1.0)"></div>
+				<div class="col-sm-2" style="cursor: pointer; color: white; min-height: 200px;" id="concordo" onclick="proximaQuestao( 0.5)"></div>
+				<div class="col-sm-2" style="cursor: pointer; color: white; min-height: 200px;" id="neutro" onclick="proximaQuestao( 0.0)"></div>
+				<div class="col-sm-2" style="cursor: pointer; color: white; min-height: 200px;" id="discordo" onclick="proximaQuestao( -0.5)"></div>
+				<div class="col-sm-2" style="cursor: pointer; color: white; min-height: 200px;" id="discordoFortemente" onclick="proximaQuestao( -1.0)"></div>
 				<div class="col-sm-1"></div>
 			</div>
 		</div>
@@ -40,17 +40,17 @@
 			        <div class="modal-body">
 			        	<h2 id="tituloEconomico">Eixo Economico: </h2>
 						<h4 id="eixoEconomico">--</h4>
-						<!--<h2 id="tituloDiplomatico">Eixo Diplomatico:</h2>
+						<h2 id="tituloDiplomatico">Eixo Diplomatico:</h2>
 						<h4 id="eixoDiplomatico">--</h4>
 						<h2 id="tituloCivil">Eixo Civil:</h2>
 						<h4 id="eixoCivil">--</h4>
 						<h2 id="tituloSocial">Eixo Social:</h2>
 						<h4 id="eixoSocial">--</h4>
 						<hr>
-						<h2 id="ideologia"></h2>-->
+						<h2 id="ideologia"></h2>
 					</div>
 			        <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <form method="POST" action="Jogar/submit">{% csrf_token %}<input type="hidden" id="e" name="eco" value=""><input type="hidden" id="d" name="dip" value=""><input type="hidden" id="c" name="civ" value=""><input type="hidden" id="s" name="soc" value=""><input type="submit" name="enviar"></form><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        </div>
 			    </div>
 			</div>
@@ -78,20 +78,20 @@
 	    var pq = 0; // Número da questão
 	    // var prev_answer = null;
 	    init_question();
-	    for (var i = 0; i < questoesEco.length; i++) {
-	        max_econ += Math.abs(questoesEco[i].effect.econ)
-	        max_dipl += Math.abs(questoesEco[i].effect.dipl)
-	        max_govt += Math.abs(questoesEco[i].effect.govt)
-	        max_scty += Math.abs(questoesEco[i].effect.scty)
+	    for (var i = 0; i < questoes.length; i++) {
+	        max_econ += Math.abs(questoes[i].effect.econ)
+	        max_dipl += Math.abs(questoes[i].effect.dipl)
+	        max_govt += Math.abs(questoes[i].effect.govt)
+	        max_scty += Math.abs(questoes[i].effect.scty)
 	    }
 	    function init_question() {
-	        document.getElementById("contextoHistoria").innerHTML = questoesEco[pq].question;
-	        document.getElementById("concordoFortemente").innerHTML = questoesEco[pq].respostas.concordoFortemente;
-	        document.getElementById("concordo").innerHTML = questoesEco[pq].respostas.concordo;
-	        document.getElementById("neutro").innerHTML = questoesEco[pq].respostas.neutro;
-	        document.getElementById("discordo").innerHTML = questoesEco[pq].respostas.discordo;
-	        document.getElementById("discordoFortemente").innerHTML = questoesEco[pq].respostas.discordoFortemente;
-	        document.getElementById("numeroQuestao").innerHTML = "Questão " + (pq + 1) + " de " + (questoesEco.length);
+	        document.getElementById("contextoHistoria").innerHTML = questoes[pq].question;
+	        document.getElementById("concordoFortemente").innerHTML = questoes[pq].respostas.concordoFortemente;
+	        document.getElementById("concordo").innerHTML = questoes[pq].respostas.concordo;
+	        document.getElementById("neutro").innerHTML = questoes[pq].respostas.neutro;
+	        document.getElementById("discordo").innerHTML = questoes[pq].respostas.discordo;
+	        document.getElementById("discordoFortemente").innerHTML = questoes[pq].respostas.discordoFortemente;
+	        document.getElementById("numeroQuestao").innerHTML = "Questão " + (pq + 1) + " de " + (questoes.length);
 	        /*if (prev_answer == null) {
 	            document.getElementById("back_button").style.display = 'none';
 	            document.getElementById("back_button_off").style.display = 'block';
@@ -102,13 +102,13 @@
 	    }
 
 	    function proximaQuestao(mult) {
-	        econ += mult*questoesEco[pq].effect.econ
-	        dipl += mult*questoesEco[pq].effect.dipl
-	        govt += mult*questoesEco[pq].effect.govt
-	        scty += mult*questoesEco[pq].effect.scty
+	        econ += mult*questoes[pq].effect.econ
+	        dipl += mult*questoes[pq].effect.dipl
+	        govt += mult*questoes[pq].effect.govt
+	        scty += mult*questoes[pq].effect.scty
 	        pq++;
 	        prev_answer = mult;
-	        if (pq < questoesEco.length) {
+	        if (pq < questoes.length) {
 	            init_question();
 	        } else {
 	        	ideologia = ""
@@ -124,18 +124,23 @@
 		            	ideodist = dist
 		        	}
 		    	}
-			    //document.getElementById("ideologia").innerHTML = ideologia
+			    document.getElementById("ideologia").innerHTML = ideologia
 
 	        	document.getElementById("tituloEconomico").innerHTML = "Eixo Econômico: " + definirTitulo(calc_pontuacao(econ,max_econ),vetorEconomico)
 	        	document.getElementById("eixoEconomico").innerHTML = "Igualdade " + calc_pontuacao(econ,max_econ) + "% : " + (100 - calc_pontuacao(econ,max_econ)) + "% Mercado"
-	        	/*document.getElementById("tituloDiplomatico").innerHTML = "Eixo Diplomático: " + definirTitulo(calc_pontuacao(dipl,max_dipl),vetorDiplomatico)
+	        	document.getElementById("tituloDiplomatico").innerHTML = "Eixo Diplomático: " + definirTitulo(calc_pontuacao(dipl,max_dipl),vetorDiplomatico)
 	        	document.getElementById("eixoDiplomatico").innerHTML = "Globalização " + calc_pontuacao(dipl,max_dipl) + "% : " + (100 - calc_pontuacao(dipl,max_dipl)) + "% Nacionalismo"
 	        	document.getElementById("tituloCivil").innerHTML = "Eixo Civil: " + definirTitulo(calc_pontuacao(govt,max_govt),vetorCivico)
 	        	document.getElementById("eixoCivil").innerHTML = "Liberdade " + calc_pontuacao(govt,max_govt) + "% : " + (100 - calc_pontuacao(govt,max_govt)) + "% Autoridade"
 	        	document.getElementById("tituloSocial").innerHTML = "Eixo Social: " + definirTitulo(calc_pontuacao(scty,max_scty),vetorSocial)
-	        	document.getElementById("eixoSocial").innerHTML = "Progresso " + calc_pontuacao(scty,max_scty) + "% : " + (100 - calc_pontuacao(scty,max_scty)) + "% Tradição"*/
+	        	document.getElementById("eixoSocial").innerHTML = "Progresso " + calc_pontuacao(scty,max_scty) + "% : " + (100 - calc_pontuacao(scty,max_scty)) + "% Tradição"
+	        	document.getElementById("e").value = "" + calc_pontuacao(econ,max_econ)
+	        	document.getElementById("c").value = "" + calc_pontuacao(govt,max_govt)
+	        	document.getElementById("d").value = "" + calc_pontuacao(dipl,max_dipl)
+	        	document.getElementById("s").value = "" + calc_pontuacao(scty,max_scty)
 	        	$("#resultados").modal("show");
-	        	//document.getElementById("fim").innerHTML = "As questoesEco acabaram, Seu resultado dentro do eixo economico foi: " + calc_pontuacao(econ,max_econ) + "% para Igualdade e " + (100 - calc_pontuacao(econ,max_econ)) + "% para Mercado"
+	        	document.getElementById("menu").innerHTML = '<center><h1>Obrigado por Jogar</h1></center>'
+	        	//document.getElementById("fim").innerHTML = "As questoes acabaram, Seu resultado dentro do eixo economico foi: " + calc_pontuacao(econ,max_econ) + "% para Igualdade e " + (100 - calc_pontuacao(econ,max_econ)) + "% para Mercado"
 	            // results();
 	        }
 	    }
@@ -144,10 +149,10 @@
 	            return;
 	        }
 	        pq--;
-	        econ -= prev_answer * questoesEco[pq].effect.econ;
-	        dipl -= prev_answer * questoesEco[pq].effect.dipl;
-	        govt -= prev_answer * questoesEco[pq].effect.govt;
-	        scty -= prev_answer * questoesEco[pq].effect.scty;
+	        econ -= prev_answer * questoes[pq].effect.econ;
+	        dipl -= prev_answer * questoes[pq].effect.dipl;
+	        govt -= prev_answer * questoes[pq].effect.govt;
+	        scty -= prev_answer * questoes[pq].effect.scty;
 	        prev_answer = null;
 	        init_question();
 

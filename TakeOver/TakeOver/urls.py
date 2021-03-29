@@ -27,7 +27,9 @@ urlpatterns = [
     path('login/submit', views.submit_login),
     path('logout', views.logout_user),
     path('minhasSalas', views.minhasSalas),
-    path('minhasSalas/Entrar_em_uma_sala', views.entrarSala),
+    path('minhasSalas/Entrar_na_sala', views.entrarSala),
+    path('minhasSalas/Entrar_na_sala/<codigoSala>', views.entrarSala_info),
+    path('minhasSalas/Entrar_na_sala/<codigoSala>/submit', views.submit_entrarSala),
     path('criarSala_cadastro', views.criarSala_cadastro),
     path('criarSala_cadastro/submit', views.submit_criarSala_cadastro),
     path('criarSala_compartilhar/<codigoSala>', views.criarSala_compartilhar),
@@ -38,5 +40,6 @@ urlpatterns = [
     path('eixoEconomico', views.eixoEconomico),
     path('eixoDiplomatico', views.eixoDiplomatico),
     path('Jogar', views.jogar),
+    path('Jogar/submit', views.submit_gravarJogo),
     path('Usuario', views.user)
 ]

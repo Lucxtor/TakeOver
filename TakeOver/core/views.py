@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from core.models import Sala, Disciplina, Alunos
+from core.models import Sala, Disciplina, Alunos, Resultado
 from django.db.models import Subquery
 
 
@@ -125,6 +125,24 @@ def entrarSala(request):
 
 
 @login_required(login_url='login/')
+def entrarSala_info(request, codigoSala):
+    minhaSala = {'minhaSala': Sala.objects.filter(codigo_sala=codigoSala)}
+    return render(request, 'entrarSala_info.html', minhaSala)
+
+
+@login_required(login_url='login/')
+def submit_entrarSala(request, codigoSala):
+    if request.POST:
+        user = request.user
+        id = request.POST.get('id')
+        sala = Sala.objects.get(codigo_sala=codigoSala)
+        Alunos.objects.create(usuario=user,
+                              sala=sala
+                              )
+    return redirect('/minhasSalas')
+
+
+@login_required(login_url='login/')
 def apagarSala(request, codigo):
     sala = Sala.objects.filter(codigo_sala=codigo)
     adm = User.objects.get(id__in=Sala.objects.filter(codigo_sala=codigo).values('adm_sala'))
@@ -132,15 +150,35 @@ def apagarSala(request, codigo):
         sala.delete()
     return redirect('/')
 
+
 @login_required(login_url='login/')
 def user(request):
-    return render(request, 'usuario.html')
+    usuario = request.user
+    dados = {'resultados': Resultado.objects.filter(usuario_resultado=usuario)}
+    return render(request, 'usuario.html', dados)
 
 
 @login_required(login_url='login/')
 def submit_atualizar_user(request):
     if request.POST:
         pass
+
+
+@login_required(login_url='login/')
+def submit_gravarJogo(request):
+    if request.POST:
+        eixoEconomico_resultado = request.POST.get('eco')
+        eixoSocial_resultado = request.POST.get('soc')
+        eixoDiplomatico_resultado = request.POST.get('dip')
+        eixoCivil_resultado = request.POST.get('civ')
+        usuario_resultado = request.user
+        Resultado.objects.create(eixoEconomico_resultado=eixoEconomico_resultado,
+                                 eixoSocial_resultado=eixoSocial_resultado,
+                                 eixoDiplomatico_resultado=eixoDiplomatico_resultado,
+                                 eixoCivil_resultado=eixoCivil_resultado,
+                                 usuario_resultado=usuario_resultado
+                                 )
+    return redirect('/', request)
 
 
 def eixoCivil(request):

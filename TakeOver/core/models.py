@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Resultado(models.Model):
-    eixoEconomico_resultado = models.IntegerField()
-    eixoSocial_resultado = models.IntegerField()
-    eixoDiplomatico_resultado = models.IntegerField()
-    eixoCivil_resultado = models.IntegerField()
+    eixoEconomico_resultado = models.FloatField()
+    eixoSocial_resultado = models.FloatField()
+    eixoDiplomatico_resultado = models.FloatField()
+    eixoCivil_resultado = models.FloatField()
     usuario_resultado = models.ForeignKey(User, on_delete=models.CASCADE)
     data_resultado = models.DateTimeField(auto_now=True)
 
@@ -16,7 +16,7 @@ class Resultado(models.Model):
         db_table = 'resultados'
 
     def __str__(self):
-        return self.usuario_resultado
+        return str(self.usuario_resultado)
 
 
 class Disciplina(models.Model):
