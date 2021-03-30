@@ -43,3 +43,6 @@ urlpatterns = [
     path('Jogar/submit', views.submit_gravarJogo),
     path('Usuario', views.user)
 ]
+
+admin.site.site_header = 'Administração Take Over'
+admin.site.index_title = 'Registros da plataforma'
